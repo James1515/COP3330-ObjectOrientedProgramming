@@ -1,0 +1,72 @@
+//--------------------------------------------------
+// Author: James Ortiz
+// File: log.txt
+// Purpose: Document to file gradual changes done to
+// project #3.
+//--------------------------------------------------
+
+//----------------
+//Feb. 11, 2018
+//----------------
+Created Prime.h and added supporting methods
+such as Dump and All with empty bodies
+
+//---------------------
+//Feb. 13, 2018
+//---------------------
+Continued creation of the Prime constructor
+After going through notes on the BitVector class.
+
+Initially Prime constructo is created as follows:
+Prime::Prime (size_t a): bv_(a)
+
+Header is then changed to the following:
+Prime::Prime (size_t a): bv_(a + 1)
+
+To ensure that there is enough space for the sieve algorithm
+to "sieve" prime values.
+
+//---------------------
+//Feb. 16, 2018
+//---------------------
+
+-Sieve is constructed following the sieve of eratrosthenes.
+-Sieve is added to the Prime constructor
+
+-The destructor is created initially with delete, then this is changed 
+since BitVector bv_ is not a dynamically allocated object in prime.cpp
+-It is left with an empty body.
+
+//----------------------
+//Feb. 17, 2018
+//----------------------
+-The member function "Expand" is added to the bitvector.cpp file
+- An algorithm is constructed as it is followed on the project
+website.
+
+//------------------------
+//Feb. 21, 2018
+//------------------------
+
+-The copy constructor and assignment constructor are created
+since bv is not dynamically allocated, a direct assignment is
+done on bv_.
+
+//------------------------
+//Feb. 22, 2018
+//------------------------
+
+-The member functions Dump, ResetUpperBound, and UpperBound, are
+created and the the program is compiled.
+
+-The member functions All(n os), and All(os) are created and compiled after
+ showing errors because of std::cout in the parameters.
+
+//-------------------------
+//Feb. 23, 2018
+//-------------------------
+
+-Program compiles and functions correctly as needed, final adjustments are made  to the program.
+
+
+
