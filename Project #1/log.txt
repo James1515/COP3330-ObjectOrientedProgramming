@@ -1,0 +1,155 @@
+log.txt # log file for UIntSet project
+File Created: 09/08/2017
+Name: James Anthony Ortiz
+CS Username: jortiz 
+
+================================================
+Hurricane Irma:
+
+Since I am a distance learning student, and I 
+currently live in Northern Florida,
+I have been one of those recently affected by 
+hurricane Irma - being without light or 
+internet access. 
+
+-James Ortiz 
+09/11-09/17. 
+================================================ 
+
+Log for test purposes:
+
+Date: 09/10/2017
+test file: data1.txt
+---------------------
+AAA abc acz NewWave 33Amperes September
+
+Date: 09/11/2017
+Using "ssort.x": 
+-------------------------------------------
+With:
+ssort.x a 6 < data1.txt > dataOut.txt
+
+Result:
+
+6 strings as read:
+  AAA
+  abc
+  acz
+  NewWave
+  33Amperes
+  September
+
+6 strings after sort:
+  33Amperes
+  AAA
+  NewWave
+  September
+  abc
+  acz
+
+---------------------------
+With: ssort.x d 6 < data1.txt > dataOut.txt
+
+6 strings as read:
+  AAA
+  abc
+  acz
+  NewWave
+  33Amperes
+  September
+
+6 strings after sort:
+  33Amperes
+  AAA
+  abc
+  acz
+  NewWave
+  September
+
+
+-------------------------------------------
+
+With: ssort.x a 5 < data1.txt > datOut.txt
+** maximum of 5 strings reached - terminating read loop
+
+5 strings as read:
+  AAA
+  abc
+  acz
+  NewWave
+  33Amperes
+
+5 strings after sort:
+  33Amperes
+  AAA
+  NewWave
+  abc
+  acz
+
+-----------------------------------------------
+
+Date: 09/17/2017
+With test.x a 5 < data1.txt > dataOut.txt
+ ** maximum of 5 strings reached - terminating read loop
+
+5 strings as read:
+  AAA
+  abc
+  acz
+  NewWave
+  33Amperes
+
+5 strings after sort:
+  33Amperes
+  AAA
+  NewWave
+  abc
+  acz
+
+Comparison is a Match with ssort.x  
+-------------------------------------
+
+With test.x a 6 < data1.txt > dataOut.txt
+ ** maximum of 6 strings reached - terminating read loop
+
+6 strings as read:
+  AAA
+  abc
+  acz
+  NewWave
+  33Amperes
+  September
+
+6 strings after sort:
+  33Amperes
+  AAA
+  NewWave
+  September
+  abc
+  acz
+
+Comparison is a match with ssort.x
+---------------------------------------- 
+Date: 09/19/2017
+With: test.x d 6 < data1.txt > dataOut.txt
+ ** maximum of 6 strings reached - terminating read loop
+
+6 strings as read:
+  AAA
+  abc
+  acz
+  NewWave
+  33Amperes
+  September
+
+6 strings after sort:
+  33Amperes
+  AAA
+  abc
+  acz
+  NewWave
+  September
+
+Matches with ssort.x
+----------------------------------------
+
