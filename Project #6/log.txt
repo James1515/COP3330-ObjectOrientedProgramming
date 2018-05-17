@@ -1,0 +1,195 @@
+//======================================================
+// Author: James Anthony Ortiz
+// File: log.txt
+// Purpose: Documentation for Project #6, as well
+// as answers related to questions about this
+// project. 
+//======================================================
+
+//===============Discussion Questions===================//
+Question #1:
+State what changes you made to transform the InsertionSort code from the
+specific code in project 1 to a function template. And for each change, explain
+why it was made.
+
+Answer: 
+void IntegerInsertionSort (int* beg, int* end)
+{
+  if (end - beg < 2) return;
+  int * i; // outer loop control
+  int * j; // inner loop control
+  int * k; // k is always j - 1
+  int   t; // value holder
+  for (i = beg; i != end; ++i)
+  {
+    t = *i;
+    for (k = i, j = k--; j != beg && t < *k; --j, --k)
+      *j = *k;
+    *j = t;
+  }
+}
+
+//---------------------------------------------------//
+
+Insertion Sort for an arbitrary type T:
+template < typename T >
+void InsertionSort (T* beg, T* end)
+{
+  if(end - beg < 2)
+  {
+    return;
+  }
+
+  T * i; //outer loop control
+  T * j; //inner loop control
+  T * k; //k is always j - 1
+  T t; //Value holder of arb. type T
+  for(i = beg; i != end; ++i)
+  {
+    t = *i;
+    for(k = i, j = k--; j != beg && t < *k; --j, --k)
+      *j = *k;
+    *j = t;
+  }
+
+}
+
+The most notable difference between these two versions of insertion sort is 
+that the template version can accomodate several types because the signature of the
+first version is replaced with an arbirary type "T" in the template, as well
+as the pointers (i, j & k) that are meant to control the loops,
+and 't' which holds the value of type "T". 
+
+Question #2: 
+A file of integers can be sorted as type int or type std::string. Explain why
+the results sometimes differ.
+
+Answer: There exists a difference in the way that string reads the int
+values in a file of ints and compares such values. For example, 1000 < 11 for
+strings but the mathematical order would be 11 < 1000.
+  
+
+Question #3:
+Explain why the sort template works for type std::string. (Hint: what operators
+are available for std::string?)
+
+Answer: std::string allows for the use of the "<" operator.
+
+Question #4:
+Explain why the sort template does not work (without some code enhancements) for
+C-strings.
+
+Answer: c-strings by themselves cannot be compared like std::strings, they also have some
+flaws that have to be addressed on behalf of the programmer, for example they 
+need to be null-terminated manually. 
+
+Question #5:
+Considering the way we were able to apply generic InsertionSort to type Product,
+describe what would be required to make the sort template actually work for
+C-strings. (You don't need details, just a few sentences that draw on the
+experience with Product.)
+
+Answer: We would have to create a version of insertion sort that would have to
+include an overloaded version of the "<" operator that that work with
+c-strings. Also, prior to using this function we would have to make sure each
+c-string is null-terminated for accurate output.
+
+//========================Project #6 Log================================//
+//3/15:
+Read documentation for project #6
+Copied product.h and product.cpp
+from project #2 and cstringdiff.cpp
+and castringdiff.h from project #1.
+
+//3/16:
+Added two templates to tsort.h:
+template < typename T >
+void Display (const T* beg, const T* end, char ofc = '\0');
+
+
+template < typename T >
+void InsertionSort (T* beg, T* end);
+
+Applied insertion sort according to the algorithm given in
+project #1:
+
+void IntegerInsertionSort (int* beg, int* end)
+{
+  if (end - beg < 2) return;
+  int * i; // outer loop control
+  int * j; // inner loop control
+  int * k; // k is always j - 1
+  int   t; // value holder
+  for (i = beg; i != end; ++i)
+  {
+    t = *i;
+    for (k = i, j = k--; j != beg && t < *k; --j, --k)
+      *j = *k;
+    *j = t;
+  }
+}
+
+
+//3/17:
+Added the overloaded operator functions to class Product:
+These functions were added to product.h, and then implemented in
+product.cpp:
+
+std::istream& operator >> ( std::istream& is , Product& p );
+bool          operator <  ( const Product& p1 , const Product& p2 );
+
+//3/19:
+Executables are created useing make all:
+Following the given data listed on the webpage for the project this matches
+according to the output:
+
+For intsort.x:
+jortiz@linprog8.cs.fsu.edu:~/cop3330/proj6>intsort.x < data.9
+ A as entered:  250 16 28 562 10 15 28 400 122
+ A after sort:  10 15 16 28 28 122 250 400 562
+
+For stringsort.x:
+jortiz@linprog8.cs.fsu.edu:~/cop3330/proj6>stringsort.x < data.9
+ A as entered:  250 16 28 562 10 15 28 400 122
+ A after sort:  10 122 15 16 250 28 28 400 562
+
+For charsort.x:
+jortiz@linprog8.cs.fsu.edu:~/cop3330/proj6>charsort.x < data.9
+ A as entered: 2501628562101528400122
+ A after sort: 0000111122222245556688
+
+
+For productsort.x:
+jortiz@linprog8.cs.fsu.edu:~/cop3330/proj6>productsort.x < data.product
+ A as entered: 
+widget_B        ABCDEF01        131.00
+gadget_1        ABCDEF02        109.99
+widget_A        ABCDEF03        129.95
+gadget_2        12345604        109.00
+widget_A        00123405        109.95
+widget_b        12344506        109.95
+gadget_1        23456707        99.99
+ A after sort: 
+gadget_1        23456707        99.99
+gadget_1        ABCDEF02        109.99
+gadget_2        12345604        109.00
+widget_A        00123405        109.95
+widget_A        ABCDEF03        129.95
+widget_b        12344506        109.95
+widget_B        ABCDEF01        131.00
+
+For stringsort.x
+jortiz@linprog8.cs.fsu.edu:~/cop3330/proj6>stringsort.x < data.product
+ A as entered:  widget_B ABCDEF01 131.00 gadget_1 ABCDEF02 109.99 widget_A
+ ABCDEF03 129.95 gadget_2 12345604 109.00 widget_A 00123405 109.95 widget_b
+ 12344506 109.95 gadget_1 23456707 99.99
+ A after sort:  00123405 109.00 109.95 109.95 109.99 12344506 12345604 129.95
+ 131.00 23456707 99.99 ABCDEF01 ABCDEF02 ABCDEF03 gadget_1 gadget_1 gadget_2
+ widget_A widget_A widget_B widget_b
+
+jortiz@linprog8.cs.fsu.edu:~/cop3330/proj6>charsort.x < data.product
+ A as entered:
+ widget_BABCDEF01131.00gadget_1ABCDEF02109.99widget_AABCDEF03129.95gadget_212345604109.00widget_A00123405109.95widget_b12344506109.95gadget_12345670799.99
+ A after sort: 
+ .......000000000000000001111111111111222222233333344444455555556667799999999999999AAAAABBBBCCCDDDEEEFFF_______aaabdddddddeeeeeeeggggggggggiiiitttttttwwww
+

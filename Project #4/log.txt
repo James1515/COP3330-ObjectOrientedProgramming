@@ -1,0 +1,63 @@
+//------------------------------------------
+// Author: James Anthony Ortiz
+// File: log.txt
+// Purpose: Log file for project #4
+//
+//------------------------------------------
+
+//Log for Project SunPass:
+2/28:
+Created Shapes.h with a parent class and child
+classes according to the specifications of the webpage.
+
+2/29:
+Created shapes.cpp with co3330, and it compiled sucessfully.
+
+2/30:
+Makefile was created as needed for both files to create stester.x,
+along with shapes.o.
+
+2/31:
+Header file for the  Vehicle class and its child classes such as Car, Truck,
+Van, etc.
+are created as specified with the instructions given.
+
+
+3/1:
+Implementation file is completed for the vehicle class and its child classes,
+there was a slight bit of confusion behind the errors at first but these were
+fixed on 3/3.
+
+3/3:
+Compilation flag errors were fixed, an error occurred in the vehicle
+constructors in which the private variables were placed last but these were
+fixed:
+
+Correct implementation:
+
+public:
+//Public methods/variables placed here
+
+private:
+//Private methods/variables placed herle
+
+protected:
+//Protected methods/variables placed here:
+
+Since these were not in the correct order, compilation did not occur.
+
+3/4:
+A minor issue was fixed where the parameter values would not show on
+both stester.x and vtester.x, this was fixed by placeing the variable values
+within the child and parent constructors in an if statement.
+For example:
+
+*/
+Vehicle::Vehicle(a1_, a2_, aN_): Shape(a1, a2, aN)
+{
+  std::cout <<  "Vehicle(" << Shape::a1_ << ... "n\";
+}//Vehicle:
+/*
+
+Project is completed and submitted on this date.
+

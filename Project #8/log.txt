@@ -1,0 +1,198 @@
+//==========================================
+// Author: James Anthony Ortiz
+// Purpose: Log for Project #7 & #8.
+//
+//===========================================
+
+//-------------Log for #7--------------------
+//Date: 4-09-2018
+Began writing Stack API, and intial functions.
+
+//Date: 4-11-2018
+Began implementing setter functions for class
+Stack.
+
+//Date: 4-12-2018
+Worked on improving the functionality of the stack
+writing Clear() Pop() along with a compatible 
+copy and assignment constructor.
+
+//Date: 4-13-2018
+Following test guidlines and procedures, I wrote
+the test harness for class Stack, useing a Swtich
+statement along with copy and assignment tests for
+completeness.
+
+//Date: 4-14-2018
+Reformed some of the srouce code that displayed 
+compilation errors.
+
+//Reformed Code in Pop()
+  //Checks if object is not empty
+  if(!this->Empty())
+  {
+    return data_[size_--];
+  }
+  //If the stack is empty, display an error.
+  std::cerr << "** Stack error: Pop() called on Empty stack\n";
+  return data_[0];
+
+//In Copy Constructor:
+  //Omitted Code:
+  //size_ = s.size_;
+  //dir_= s.dir_;
+  //ofc_= s.ofc_;
+  //data_ = new T [size_];
+  //for (size_t i = 0; i < size_; ++i)
+  //{
+  //  data_[i] = s.data_[i];
+  //}
+
+  //Refactored code
+  if(this != &s)
+  {
+    delete data_;
+    size_t size = s.size_;
+    data_ = new T[size];
+    dir_ = s.dir_;
+    ofc_ = s.ofc_;
+    for(size_t i = 0; i < size; ++i)
+    {
+      data_[i] = s.data_[i];
+    }
+  }
+  return *this;
+
+
+//4-16-2018
+Submitted project #7 
+
+
+//--------------Project #8--------------//
+
+//4-17-2018
+//Queue Project Started
+//Added in2post_i.x program
+//Added additional Area51 .x files
+
+//4-20-2018
+//Started building fqueue and tqueue files
+//Worked on Queue API
+
+//4-21-2018
+//Worked on building tqueue member functions
+//such as Push(), Pop(), Front(), Capacity(),
+//and the Ringbuffer integrated with class link
+//that is within class Queue.
+
+//4-23-2018
+//Refactored older code for several important 
+//functions within tqueue. Built a derived test
+//harness from the Stack version.
+
+//Changes made to functions in tqueue:
+template <typename T>
+  T Queue<T>::Pop()
+  {
+    // Queue<T>::Link* linkTemp = firstUsed_;
+    
+    //if (!Empty()) {
+
+    //  if(firstUsed_ == firstFree_)
+    //  {
+    //    firstUsed_ = 0;
+    //    firstFree_ = 0;
+    //  }
+    //  else 
+    //  {
+    //    firstUsed_ = firstUsed_->next_;
+    //  }
+    //  T qe_ = linkTemp->element_;
+    //  delete linkTemp;
+    //  return qe_;
+    // }
+    // else
+    //{
+    //  std::cerr << "** Queue error: Pop called on empty queue" << "\n";
+    //  return T;      
+    // }
+
+    //==============Refactored Code====================//
+    if (Empty())
+    {
+      std::cerr << "** Queue error: Pop() called on empty queue" << std::endl;
+      exit(EXIT_FAILURE);
+    }
+    else
+    {
+      Queue<T>::Link* tempLink = firstUsed_;
+
+      if (firstUsed_ == firstFree_)
+        firstUsed_ = firstFree_ = 0;
+      else
+        firstUsed_ = firstUsed_->next_;
+      T data = tempLink->element_;
+      delete tempLink;
+      return data;
+    }
+  }
+
+//In Function Clear()
+// T qe_ = firstLink_->element_;
+    /*
+    if (Size() == 0)
+    {
+    std::cerr << "Clear called on an empty Queue";
+    } 
+    else {
+      while (!Empty())
+      {
+        firstUsed_ = firstUsed_->next_;
+      }
+    }
+    */
+
+//Used Release() instead
+    Release();
+
+//Tested in2post, in2post.x compiles correctly,
+//showing transition from in to post-fix, with a few minor 
+//display issues.
+jortiz@shell.cs.fsu.edu:~/cop3330/proj8>in2post.x
+
+  Welcome to in2post.
+
+  This program demonstrates the conversion of infix to postfix expressions.
+  No arithmetic is done. For purposes of effective display of the algorithm,
+  only single-character symbols are assumed.
+
+Enter infix expression (0 to quit): 23*+5*0
+
+S                        Q1                       Q2
+--                       --                       --
+NULL                     23*+5*0
+                  NULL
+NULL                     3*+5*0
+                   2`
+NULL                     *+5*0
+                    2`3`
+*                        +5*0
+                     2`3`
+NULL                     +5*0
+                     2`3`*`
++                        5*0
+                      2`3`*`
++                        *0
+                       2`3`*`5`
++*                       0
+                        2`3`*`5`
++*                       NULL                     2`3`*`5`0`
++                        NULL                     2`3`*`5`0`*`
+NULL                     NULL                     2`3`*`5`0`*`+`
+
+ postfix conversion: 2`3`*`5`0`*`+`
+Enter infix expression (0 to quit): 
+
+
+
+//Completed project #8.

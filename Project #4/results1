@@ -1,0 +1,97 @@
+
+Enter sn ('x' to quit): 1
+Vehicle()
+Short Name:    UNK
+Toll Charge:   2.00
+Serial Number: 1
+Passenger Cap: 1
+Load Capacity: 0.00
+~Vehicle()
+
+Enter sn ('x' to quit): 2
+Vehicle()
+Car()
+Short Name:    CAR
+Toll Charge:   2.00
+Serial Number: 2
+Passenger Cap: 2
+Load Capacity: 0.00
+~Car()
+~Vehicle()
+
+Enter sn ('x' to quit): 3
+Vehicle()
+Truck()
+Short Name:    TRK
+Toll Charge:   10.00
+Serial Number: 3
+Passenger Cap: 3
+Load Capacity: 0.00
+DOT License:   DOTLICENSE OK
+~Truck()
+~Vehicle()
+
+Enter sn ('x' to quit): 4
+Vehicle()
+Truck()
+Shape(20.00,4.00,8.00,1)
+Box(20.00,4.00,8.00,1)
+Van()
+Short Name:    VAN
+Toll Charge:   10.00
+Serial Number: 4
+Passenger Cap: 4
+Load Capacity: 640.00
+DOT License:   DOTLICENSE OK
+~Van()
+~Box()
+~Shape()
+~Truck()
+~Vehicle()
+
+Enter sn ('x' to quit): 5
+Vehicle()
+Truck()
+Shape(40.00,0.00,3.00,1)
+Cylinder(40.00,3.00,1)
+Tanker()
+Short Name:    TNK
+Toll Charge:   10.00
+Serial Number: 5
+Passenger Cap: 5
+Load Capacity: 15079.64
+DOT License:   DOTLICENSE OK
+~Tanker()
+~Cylinder()
+~Shape()
+~Truck()
+~Vehicle()
+
+Enter sn ('x' to quit): 6
+Vehicle()
+Truck()
+Shape(20.00,6.00,0.00,1)
+Rectangle(20.00,6.00,1)
+Flatbed()
+Short Name:    FLT
+Toll Charge:   10.00
+Serial Number: 6
+Passenger Cap: 6
+Load Capacity: 120.00
+DOT License:   DOTLICENSE OK
+~Flatbed()
+~Rectangle()
+~Shape()
+~Truck()
+~Vehicle()
+
+Enter sn ('x' to quit): 7
+Vehicle()
+Short Name:    UNK
+Toll Charge:   2.00
+Serial Number: BadSerialNumber
+Passenger Cap: 0
+Load Capacity: 0.00
+~Vehicle()
+
+Enter sn ('x' to quit): x
