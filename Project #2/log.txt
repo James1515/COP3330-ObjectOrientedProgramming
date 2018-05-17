@@ -1,0 +1,216 @@
+//--------------------------------------------------------
+// log.txt # log file for UIntSet project
+// Date created: 1/26/2018
+// Name: James Ortiz
+// CS Username: jortiz
+//--------------------------------------------------------
+
+1/26/2018:
+Created Product Header file (product.h)
+====================================
+Created constructors, and operators 
+in product.h
+public:
+  Product            ();          //Default constructor:
+  Product            (const char * n, uint32_t cde, float cst); //3-argument constructor:
+  ~Product           ();                 //Destructor:
+  Product            (const Product& a); //Copy constructor:
+  Product& operator= (const Product& a); //assignment operator:
+...
+
+1/27
+Created "Setter and Getter" Member Functions
+in product.h as well as the implementation
+of these functions in product.cpp.
+=============================================
+...
+ //--------------------------------------------------------
+ //Setter & Getter member functions:
+ //--------------------------------------------------------
+  void SetName        ( const char* name ); //sets the name field
+  void SetBarCode     ( uint32_t bCode);    //sets the bar code field
+  void SetCost        ( float cst );       //sets the cost field
+  const char* GetName () const;        //returns a const pointer to the name
+  field
+  uint32_t GetBarCode () const;        //returns the bar code by value
+  float GetCost       () const;        //returns cost by value
+
+
+
+1/28
+Made minor changes to the product.cpp
+file due to shallow copys (assignment 
+operator).
+=====================================
+  //Omitted:
+  // if(this != &a)
+  //{
+  //  if(name_ != nullptr)
+  //  {
+  //  delete[] name_;
+  //  }
+  //    size_t size = strlen(a.GetName());
+  //name_ = new char[1+size];
+  //name_[size] = '\0';
+  //strcpy(name_, a.GetName());
+  //}
+  //return *this;
+
+  //Applied:
+  if (this != &a)
+  {
+    delete [] name_;
+    size_t size = strlen(a.GetName());
+    name_ = new char[1+size];
+    name_[size] = '\0';
+    strcpy(name_, a.GetName());
+    code_ = a.GetBarCode();
+    cost_ = a.GetCost();
+
+  }
+  return *this;
+
+1/29:
+Created makefile for project #2
+compiled producttest1_i.x and 
+producttest2_i.x as well as producttest2.x
+======================================
+#Compiler:
+CC = g++ -std=c++11
+
+#CFlags:
+CFLAGS = -g -Wall -Wextra -c
+
+#LFLAGS:
+LFLAGS = -g -Wall -Wextra
+
+#OBJS:
+OBJS = product.o producttest1.o producttest2.o
+
+
+all: producttest1.x producttest2.x
+
+producttest1.x: product.o producttest1.o
+        $(CC) $(LFLAGS) -o producttest1.x product.o producttest1.o
+
+producttest2.x: product.o producttest2.o
+        $(CC) $(LFLAGS) -o producttest2.x product.o producttest2.o
+
+product.o: product.cpp product.h
+        $(CC) $(CFLAGS) -I. product.cpp
+
+product.o: product.cpp product.h
+        $(CC) $(CFLAGS) -I. product.cpp
+
+producttest1.o: producttest1.cpp product.h
+        g++ -std=c++11 -Wall -Wextra -c -I. producttest1.cpp
+
+producttest2.o: producttest2.cpp product.h
+        g++ -std=c++11 -Wall -Wextra -c -I. producttest2.cpp
+
+clean:
+        rm *.o
+
+
+1/31:
+Performed Final Results, and Compared 
+Values.
+======================================
+jortiz@shell.cs.fsu.edu:~/cop3330/proj2>producttest2_i.x
+ Products after declaration:
+  p1 = product_1        FEDCBA98        100.00
+  p2 = product_2        89ABCDEF        200.00
+ Products after client program changes name, code, and cost variables:
+  p1 = product_1        FEDCBA98        100.00
+  p2 = product_2        89ABCDEF        200.00
+jortiz@shell.cs.fsu.edu:~/cop3330/proj2>producttest2.x
+ Products after declaration:
+  p1 = product_1        FEDCBA98        100.00
+  p2 = product_2        89ABCDEF        200.00
+ Products after client program changes name, code, and cost variables:
+  p1 = product_1        FEDCBA98        100.00
+  p2 = product_2        89ABCDEF        200.00
+=====================================================
+Products after declaration:
+  p1 = hammer   FFFFFFFF        15.00
+  p2 = #        00000000        0.00
+ Products after Set:
+  p1 = Copy Checker     FFFFFFFF        10.00
+  p2 = Assign Checker   00000000        20.00
+ Products after p3 = CopyCheck(p1):
+  p1 = Copy Checker     FFFFFFFF        10.00
+  p3 = Copy Checker     FFFFFFFF        10.00
+ Products after AssignCheck(p2,p3):
+  p2 = Assign Checker   00000000        20.00
+  p3 = Assign Checker   00000000        20.00
+ Products after p1 = p2 = p3 = p4:
+  p1 = Transitive Assignment Check      00000032        25.00
+  p2 = Transitive Assignment Check      00000032        25.00
+  p3 = Transitive Assignment Check      00000032        25.00
+  p4 = Transitive Assignment Check      00000032        25.00
+ Product Array after declaration:
+  p[ 0] = #     00000000        0.00
+  p[ 1] = #     00000000        0.00
+  p[ 2] = #     00000000        0.00
+  p[ 3] = #     00000000        0.00
+  p[ 4] = #     00000000        0.00
+  p[ 5] = #     00000000        0.00
+  p[ 6] = #     00000000        0.00
+  p[ 7] = #     00000000        0.00
+  p[ 8] = #     00000000        0.00
+  p[ 9] = #     00000000        0.00
+ Product Array after Set:
+  p[ 0] = Titanium Hammer       00000011        17.00
+  p[ 1] = Titanium Hammer       00000012        17.50
+  p[ 2] = Titanium Hammer       00000013        18.00
+  p[ 3] = Titanium Hammer       00000014        18.50
+  p[ 4] = Titanium Hammer       00000015        19.00
+  p[ 5] = Titanium Hammer       00000016        19.50
+  p[ 6] = Titanium Hammer       00000017        20.00
+  p[ 7] = Titanium Hammer       00000018        20.50
+  p[ 8] = Titanium Hammer       00000019        21.00
+  p[ 9] = Titanium Hammer       0000001A        21.50
+
+
+ Products after declaration:
+  p1 = hammer   FFFFFFFF        15.00
+  p2 = #        00000000        0.00
+ Products after Set:
+  p1 = Copy Checker     FFFFFFFF        10.00
+  p2 = Assign Checker   00000000        20.00
+ Products after p3 = CopyCheck(p1):
+  p1 = Copy Checker     FFFFFFFF        10.00
+  p3 = Copy Checker     FFFFFFFF        10.00
+ Products after AssignCheck(p2,p3):
+  p2 = Assign Checker   00000000        20.00
+  p3 = Assign Checker   00000000        20.00
+ Products after p1 = p2 = p3 = p4:
+  p1 = Transitive Assignment Check      00000032        25.00
+  p2 = Transitive Assignment Check      00000032        25.00
+  p3 = Transitive Assignment Check      00000032        25.00
+  p4 = Transitive Assignment Check      00000032        25.00
+ Product Array after declaration:
+  p[ 0] = #     00000000        0.00
+  p[ 1] = #     00000000        0.00
+  p[ 2] = #     00000000        0.00
+  p[ 3] = #     00000000        0.00
+  p[ 4] = #     00000000        0.00
+  p[ 5] = #     00000000        0.00
+  p[ 6] = #     00000000        0.00
+  p[ 7] = #     00000000        0.00
+  p[ 8] = #     00000000        0.00
+  p[ 9] = #     00000000        0.00
+ Product Array after Set:
+  p[ 0] = Titanium Hammer       00000011        17.00
+  p[ 1] = Titanium Hammer       00000012        17.50
+  p[ 2] = Titanium Hammer       00000013        18.00
+  p[ 3] = Titanium Hammer       00000014        18.50
+  p[ 4] = Titanium Hammer       00000015        19.00
+  p[ 5] = Titanium Hammer       00000016        19.50
+  p[ 6] = Titanium Hammer       00000017        20.00
+  p[ 7] = Titanium Hammer       00000018        20.50
+  p[ 8] = Titanium Hammer       00000019        21.00
+  p[ 9] = Titanium Hammer       0000001A        21.50
+
+
+
